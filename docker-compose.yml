@@ -1,10 +1,14 @@
-version: "3.9"
 services:
   flask-app:
     build: .
     container_name: flask-app
     ports:
       - "5000:5000"
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
+    volumes:
+      - ./app:/app
     depends_on:
       - db  
   
