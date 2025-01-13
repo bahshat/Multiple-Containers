@@ -1,0 +1,20 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "PostgreSQL DB From Container",
+      "Group": "Servers",
+      "Host": "db",
+      "Port": 5432,
+      "SSLMode": "prefer",
+      "Username": "postgres",
+      "Password": "postgres",
+      "MaintenanceDB": "postgres",
+      "UseSSHTunnel": 0,
+      "TunnelHost": "",
+      "TunnelPort": "",
+      "TunnelUsername": "",
+      "TunnelAuthentication": 0,
+      "TunnelIdentityFile": ""
+    }
+  }
+}

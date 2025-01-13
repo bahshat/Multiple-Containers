@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  flask-app:
+    build: .
+    container_name: flask-app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db  
+  
+  nginx:
+    image: nginx:latest
+    container_name: nginx-default
+    ports: 
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - flask-app
+  
+  db:
+    image: postgres:latest
+    container_name: postgres-default
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+  
+  pgAdmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-default
+    ports:
+      - 6010:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=1234
+      - PGADMIN_SHARED_DB=postgres
+      - PGADMIN_SHARED_USER=postgres
+      - PGADMIN_SHARED_PASSWORD=postgres
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    depends_on:
+      - db
